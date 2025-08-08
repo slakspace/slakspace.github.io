@@ -2,85 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slak – Modern Team Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Slak – Open Source Team Chat</title>
   <style>
-    /* Animated gradient background */
-    body {
+    /* Global styles */
+    * {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      text-align: center;
-      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c);
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #1b1b1b, #0d2b45, #1a3c40, #282828);
       background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      min-height: 100vh;
+      animation: bgShift 20s ease infinite;
+      color: #ffffff;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      padding: 0 1rem;
+      align-items: center;
     }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes bgShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
-    h1 {
+    .hero {
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      max-width: 700px;
+      margin: 2rem;
+    }
+
+    .hero h1 {
       font-size: 3rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto 2rem auto;
+    .hero p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #dddddd;
     }
 
     .button {
-      background-color: #00c9a7;
+      background-color: #00ffae;
       color: #000;
-      padding: 0.75rem 1.5rem;
+      padding: 0.8rem 1.5rem;
       font-size: 1rem;
+      font-weight: bold;
       border: none;
       border-radius: 8px;
+      cursor: pointer;
       text-decoration: none;
-      transition: transform 0.2s ease, background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .button:hover {
+      background-color: #00e6a0;
       transform: scale(1.05);
-      background-color: #02b293;
     }
 
     footer {
       position: absolute;
       bottom: 1rem;
       width: 100%;
+      text-align: center;
       font-size: 0.85rem;
-      color: #ccc;
+      color: #999;
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 2.25rem;
+      .hero h1 {
+        font-size: 2rem;
       }
-
-      p {
+      .hero p {
         font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <main>
+  <section class="hero">
     <h1>Welcome to Slak</h1>
-    <p>A blazing-fast, full-featured, open source team chat platform for everyone – from nonprofits to enterprises.</p>
-    <a class="button" href="https://github.com/slakspace" target="_blank">View on GitHub</a>
-  </main>
+    <p>Slak is a blazing-fast, full-featured, open source team chat app designed for nonprofits, startups, and organizations of all sizes. Built with love, and powered by modern tech.</p>
+    <a href="https://github.com/slakspace" class="button" target="_blank">View on GitHub</a>
+  </section>
   <footer>
-    &copy; 2025 Slak. Open source & built with ♥️ by the community.
+    &copy; 2025 Slak. Built by the open source community.
   </footer>
 </body>
 </html>
+  
