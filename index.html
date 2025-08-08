@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Slak – Open Source Team Chat</title>
   <style>
-    /* Global styles */
+    :root {
+      --bg-dark: #0c0c1e;
+      --accent: #00f2ff;
+      --text-light: #f0f0f0;
+      --text-muted: #cccccc;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -14,46 +20,43 @@
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(-45deg, #1b1b1b, #0d2b45, #1a3c40, #282828);
-      background-size: 400% 400%;
-      animation: bgShift 20s ease infinite;
-      color: #ffffff;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: var(--bg-dark);
+      overflow: hidden;
+      color: var(--text-light);
     }
 
-    @keyframes bgShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
 
     .hero {
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       padding: 2rem;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-      max-width: 700px;
-      margin: 2rem;
+      text-align: center;
     }
 
     .hero h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
+      color: var(--accent);
     }
 
     .hero p {
       font-size: 1.25rem;
-      line-height: 1.6;
+      max-width: 700px;
       margin-bottom: 2rem;
-      color: #dddddd;
+      color: var(--text-muted);
     }
 
     .button {
-      background-color: #00ffae;
+      background-color: var(--accent);
       color: #000;
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
@@ -66,7 +69,7 @@
     }
 
     .button:hover {
-      background-color: #00e6a0;
+      background-color: #00d8e6;
       transform: scale(1.05);
     }
 
@@ -76,7 +79,7 @@
       width: 100%;
       text-align: center;
       font-size: 0.85rem;
-      color: #999;
+      color: var(--text-muted);
     }
 
     @media (max-width: 600px) {
@@ -90,14 +93,57 @@
   </style>
 </head>
 <body>
+  <canvas id="bg"></canvas>
   <section class="hero">
-    <h1>Welcome to Slak</h1>
-    <p>Slak is a blazing-fast, full-featured, open source team chat app designed for nonprofits, startups, and organizations of all sizes. Built with love, and powered by modern tech.</p>
+    <h1>Meet Slak</h1>
+    <p>Slak is a free and open-source chat app for teams and organizations. Whether you're running a nonprofit or building a startup, Slak gives you real-time messaging, channels, threads, and more — without the paywalls.</p>
     <a href="https://github.com/slakspace" class="button" target="_blank">View on GitHub</a>
   </section>
   <footer>
-    &copy; 2025 Slak. Built by the open source community.
+    &copy; 2025 Slak. Open source and community-driven.
   </footer>
+
+  <!-- ✨ Background particles animation (canvas) -->
+  <script>
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+
+    let w, h;
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const particles = Array.from({ length: 70 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2 + 1,
+      dx: Math.random() * 0.5 - 0.25,
+      dy: Math.random() * 0.5 - 0.25,
+    }));
+
+    function draw() {
+      ctx.fillStyle = "#0c0c1e";
+      ctx.fillRect(0, 0, w, h);
+
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "#00f2ff88";
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > w) p.dx *= -1;
+        if (p.y < 0 || p.y > h) p.dy *= -1;
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
 </body>
 </html>
-  
