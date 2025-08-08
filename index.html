@@ -3,158 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Slak – Open Source Team Chat</title>
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <title>Slak – The Open Source Slack Alternative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #6c63ff;
+      --background: #1e1e2f;
+      --text: #ffffff;
+      --accent: #ff5e5e;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    body {
+    html, body {
       font-family: 'Inter', sans-serif;
-      background-color: #0f0f13;
-      color: #f0f0f0;
-      overflow-x: hidden;
-      position: relative;
+      color: var(--text);
+      background-color: var(--background);
+      scroll-behavior: smooth;
     }
 
-    .background {
-      position: fixed;
-      width: 200%;
-      height: 200%;
-      background-image: radial-gradient(white 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: parallax 120s linear infinite;
-      z-index: 0;
+    header {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(120deg, var(--primary), #3a3a60);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
       top: -50%;
       left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 1%, transparent 1%);
+      background-size: 50px 50px;
+      animation: moveBackground 40s linear infinite;
+      z-index: 0;
     }
 
-    @keyframes parallax {
+    @keyframes moveBackground {
       0% { transform: translate(0, 0); }
       100% { transform: translate(50px, 50px); }
     }
 
-    .hero {
+    .hero-content {
       position: relative;
       z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       padding: 2rem;
     }
 
     h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
-      color: #ffffff;
     }
 
     p {
       font-size: 1.25rem;
-      max-width: 600px;
-      margin-bottom: 2rem;
-      color: #cccccc;
+      max-width: 700px;
+      margin: 0 auto 2rem;
     }
 
-    .btn {
-      background-color: #6a5acd;
+    .cta-button {
+      background-color: var(--accent);
       color: white;
+      border: none;
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
-      border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .btn:hover {
-      background-color: #7c6de0;
+    .cta-button:hover {
+      background-color: #e64d4d;
     }
 
-    .heart {
-      font-size: 2rem;
-      margin-top: 2rem;
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.15); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.7; }
-    }
-
-    .features {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 3rem;
-      padding: 2rem;
-      z-index: 1;
-      position: relative;
+    section#more {
+      padding: 5rem 2rem;
+      background: #29293d;
+      text-align: center;
     }
 
     .feature {
-      margin-bottom: 3rem;
       max-width: 700px;
-      text-align: left;
+      margin: 2rem auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease-out;
     }
 
-    .feature h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      color: #f4f4f4;
+    .feature.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .feature p {
-      color: #aaaaaa;
-      line-height: 1.5;
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #1b1b2a;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <div class="background"></div>
 
-  <div class="hero">
-    <h1>Welcome to Slak</h1>
-    <p>A clean, open-source team chat app for everyone — built with ❤️ for hackers, teams, and the rest of us.</p>
-    <button class="btn" onclick="showFeatures()">Learn More</button>
-    <div class="heart">❤️</div>
-  </div>
+  <header>
+    <div class="hero-content">
+      <h1>Slak ❤️</h1>
+      <p>The open source, self-hostable alternative to Slack. Built for teams of all kinds — from nonprofits to startups to global companies.</p>
+      <button class="cta-button" onclick="document.getElementById('more').scrollIntoView({ behavior: 'smooth' })">
+        Learn More
+      </button>
+    </div>
+  </header>
 
-  <div class="features" id="features">
-    <div class="feature" data-aos="fade-up">
-      <h2>🚀 Familiar, but open</h2>
-      <p>Slak brings the best parts of Slack without the price tag — channels, threads, emoji, search, and more.</p>
+  <section id="more">
+    <div class="feature">
+      <h2>Built with ❤️ for You</h2>
+      <p>Slak is a clean, fast, full-featured clone of Slack — but open, extensible, and free to host. It's built using modern tools and practices, including Docker, PostgreSQL, and a rock-solid full-stack framework.</p>
     </div>
-    <div class="feature" data-aos="fade-up" data-aos-delay="100">
-      <h2>🛠️ Developer-first</h2>
-      <p>Built to be hacked, self-hosted, themed, and extended. All code is open source and MIT licensed.</p>
-    </div>
-    <div class="feature" data-aos="fade-up" data-aos-delay="200">
-      <h2>🧪 One-line deploys</h2>
-      <p>Dev and production environments spin up instantly. Deploy to Fly.io or Docker in one command.</p>
-    </div>
-    <div class="feature" data-aos="fade-up" data-aos-delay="300">
-      <h2>🔒 Your data, your rules</h2>
-      <p>Perfect for teams that need full control — nonprofits, startups, researchers, and private groups.</p>
-    </div>
-  </div>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <div class="feature">
+      <h2>Deploy in One Command</h2>
+      <p>Want to run it locally or on the cloud? No problem. Slak supports one-line deployment for both development and production — including support for Fly.io and custom domains.</p>
+    </div>
+
+    <div class="feature">
+      <h2>Made to Grow</h2>
+      <p>Whether you're a small team or a growing organization, Slak is designed to scale. Full API support, user management, real-time messaging, and integrations coming soon.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Slak. Open source on <a href="https://github.com/slakspace" style="color: var(--text); text-decoration: underline;">GitHub</a>.
+  </footer>
+
   <script>
-    AOS.init();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
 
-    function showFeatures() {
-      const features = document.getElementById('features');
-      features.style.display = 'flex';
-      window.scrollTo({ top: features.offsetTop, behavior: 'smooth' });
-    }
+    document.querySelectorAll('.feature').forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
