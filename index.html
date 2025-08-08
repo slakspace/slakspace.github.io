@@ -5,145 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Slak – Open Source Team Chat</title>
   <style>
-    :root {
-      --bg-dark: #0c0c1e;
-      --accent: #00f2ff;
-      --text-light: #f0f0f0;
-      --text-muted: #cccccc;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-dark);
-      overflow: hidden;
-      color: var(--text-light);
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(120deg, #1e1e2f, #23253a);
+      color: #fff;
+      overflow-x: hidden;
     }
 
     .hero {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
       padding: 2rem;
-      text-align: center;
     }
 
-    .hero h1 {
+    h1 {
       font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
+      margin: 0.5em 0;
     }
 
-    .hero p {
-      font-size: 1.25rem;
-      max-width: 700px;
-      margin-bottom: 2rem;
-      color: var(--text-muted);
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
     }
 
-    .button {
-      background-color: var(--accent);
-      color: #000;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      font-weight: bold;
+    .btn {
+      background: #00b894;
       border: none;
-      border-radius: 8px;
+      color: white;
+      padding: 0.75em 1.5em;
+      font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 1.5rem;
+      transition: background 0.3s;
     }
 
-    .button:hover {
-      background-color: #00d8e6;
-      transform: scale(1.05);
+    .btn:hover {
+      background: #019875;
     }
 
-    footer {
+    .features {
+      display: none;
+      margin-top: 2rem;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 1.5rem;
+      max-width: 700px;
+    }
+
+    .features h2 {
+      margin-top: 0;
+    }
+
+    .features ul {
+      padding-left: 1.2rem;
+    }
+
+    .features li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* CSS Animated Background */
+    .background-animation {
       position: absolute;
-      bottom: 1rem;
+      top: 0;
+      left: 0;
+      height: 100%;
       width: 100%;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
+      overflow: hidden;
+      z-index: 0;
     }
 
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2rem;
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      animation: rise 20s infinite ease-in;
+    }
+
+    .bubble:nth-child(2) {
+      width: 20px;
+      height: 20px;
+      left: 25%;
+      animation-duration: 15s;
+    }
+
+    .bubble:nth-child(3) {
+      left: 50%;
+      animation-duration: 25s;
+    }
+
+    .bubble:nth-child(4) {
+      left: 75%;
+      width: 60px;
+      height: 60px;
+      animation-duration: 30s;
+    }
+
+    .bubble:nth-child(5) {
+      left: 90%;
+      width: 10px;
+      height: 10px;
+      animation-duration: 18s;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(0) scale(1);
       }
-      .hero p {
-        font-size: 1rem;
+      to {
+        transform: translateY(-120vh) scale(1.5);
       }
     }
   </style>
 </head>
 <body>
-  <canvas id="bg"></canvas>
-  <section class="hero">
-    <h1>Meet Slak</h1>
-    <p>Slak is a free and open-source chat app for teams and organizations. Whether you're running a nonprofit or building a startup, Slak gives you real-time messaging, channels, threads, and more — without the paywalls.</p>
-    <a href="https://github.com/slakspace" class="button" target="_blank">View on GitHub</a>
-  </section>
-  <footer>
-    &copy; 2025 Slak. Open source and community-driven.
-  </footer>
 
-  <!-- ✨ Background particles animation (canvas) -->
-  <script>
-    const canvas = document.getElementById("bg");
-    const ctx = canvas.getContext("2d");
+  <div class="background-animation">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
 
-    let w, h;
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resize);
-    resize();
+  <div class="hero">
+    <h1>Welcome to Slak ❤️</h1>
+    <p>A fast, free, and open source alternative to Slack — designed for everyone from small nonprofits to global teams.</p>
+    <button class="btn" onclick="document.querySelector('.features').style.display='block'">Learn More</button>
 
-    const particles = Array.from({ length: 70 }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 2 + 1,
-      dx: Math.random() * 0.5 - 0.25,
-      dy: Math.random() * 0.5 - 0.25,
-    }));
+    <div class="features">
+      <h2>Why Slak?</h2>
+      <ul>
+        <li>🌐 100% free and open source</li>
+        <li>⚡ Fast, responsive, and lightweight</li>
+        <li>💬 Channels, threads, notifications, mentions</li>
+        <li>🔐 Secure and scalable — great for teams of any size</li>
+        <li>🚀 Easy one-line deployment (Fly.io, Docker, or your own VPS)</li>
+        <li>📱 Mobile-ready API for future app support</li>
+      </ul>
+      <p>
+        Slak is being developed from the ground up as an open-source alternative to traditional team chat platforms — 
+        with a strong focus on clean UI, performance, and community-driven growth. 
+        <a href="https://github.com/slakspace/slak" target="_blank">Contribute on GitHub</a> or star the project to support it!
+      </p>
+    </div>
+  </div>
 
-    function draw() {
-      ctx.fillStyle = "#0c0c1e";
-      ctx.fillRect(0, 0, w, h);
-
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "#00f2ff88";
-        ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
-
-        if (p.x < 0 || p.x > w) p.dx *= -1;
-        if (p.y < 0 || p.y > h) p.dy *= -1;
-      }
-
-      requestAnimationFrame(draw);
-    }
-
-    draw();
-  </script>
 </body>
 </html>
