@@ -3,39 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slak – Open Source Team Chat</title>
+  <title>Slak – Modern Team Chat</title>
   <style>
+    /* Animated gradient background */
     body {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
-      background: #121212;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       color: white;
       text-align: center;
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 1rem;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     h1 {
       font-size: 3rem;
+      margin-bottom: 0.5rem;
     }
+
     p {
       font-size: 1.2rem;
-      max-width: 600px;
-    }
-    a {
-      margin-top: 1em;
-      display: inline-block;
-      color: #1ecbe1;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h1>Slak</h1>
-  <p>Slack, reimagined: a free, open source team communication platform for everyone.</p>
-  <a href="https://github.com/slakspace/slak">View the code on GitHub</a>
-</body>
-</html>
